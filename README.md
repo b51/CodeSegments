@@ -10,6 +10,8 @@ Some code segments.
 ## Python Codes
 * autorun.py
     * Will autorun when ubuntu startup.
+* scan_dist_cal.py
+    * Output laser dist max, min, mean and var.
 
 ## Shell Scripts
 * autonfs.sh
