@@ -7,6 +7,10 @@ Some code segments.
 * choose_line.h/cpp
     * Choose line in opencv.
 
+## Python Codes
+* autorun.py
+    * Will autorun when ubuntu startup.
+
 ## Shell Scripts
 * autonfs.sh
     * auto mount nfs
