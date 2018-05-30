@@ -47,3 +47,11 @@ public:
     LOG(INFO) << "TestFunction Execute.";
   }
 }
+
+/**
+ * Usage of ...
+ *
+ * In function, use ##__VA_ARGS__ as ...
+ */
+#define DLOG(fmt, ...)\
+        do { if (DEBUG) printf(fmt, ##__VA_ARGS__); } while(0)
