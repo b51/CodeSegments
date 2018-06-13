@@ -53,5 +53,36 @@ public:
  *
  * In function, use ##__VA_ARGS__ as ...
  */
-#define DLOG(fmt, ...)\
+#define DLOG(fmt, ...) \
         do { if (DEBUG) printf(fmt, ##__VA_ARGS__); } while(0)
+
+/**********************************************************************
+ **********************************************************************/
+/**
+ * Get class name and combine string in macro
+ */
+#define GET_NAME(name) \
+  virtual const char* GetClassName() const { LOG(INFO) << #name; return #name; } \
+  virtual void GetNameCompose() const ( LOG(INFO) << NameCompose_##name; )
+
+const int NameCompose_ClassA   = 1;
+const int NameCompose_ClassB   = 2;
+const int NameCompose_ClassC   = 3;
+const int NameCompose_ClassD   = 4;
+
+/**
+ * Usage:
+ *    ClassA class_a;
+ *    class_a.GetClassName() // logout "ClassA"
+ *    class_a.GetNameCompose() // logout "1", for NameCompose_ClassA = 1
+ */
+class ClassA()
+{
+public:
+  GET_NAME(ClassA);  // This method will add function GetClassName and GetNameCompose to ClassA
+public:
+  ClassA() {};
+  ~ClassA() {};
+}
+/**********************************************************************
+ **********************************************************************/
