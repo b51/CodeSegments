@@ -10,6 +10,8 @@
 ************************************************************************/
 
 #include <iostream>
+#include <fstream>
+#include <map>
 #include <glog/logging.h>
 
 /**
@@ -86,3 +88,32 @@ public:
 }
 /**********************************************************************
  **********************************************************************/
+
+/**
+ *  Reading configurations from file
+ *  eg. Read from nicp_eth_laser.conf
+ */
+std::cout << "-- Read Configurations --" << std::endl;
+std::ifstream is(argv[1]);
+std::map<std::string, float> input_parameters;
+if (!is)
+{
+  std::cerr << "Impossible to open configuration file: " << argv[1] << std::endl;
+  return -1;
+}
+while (is.good())
+{
+  char buf[1024];
+  is.getline(buf, 1024);
+  std::istringstream iss(buf);
+
+  std::string parameter;
+  float value;
+  if (!(iss >> parameter >> value)) continue;
+  if (parameter[0] == '#') continue;
+  input_parameters.insert(std::pair<std::string, float>(parameter, value));
+}
+for (auto it = input_parameters.begin(); it != input_parameters.end(); it++)
+  std::cout << it->first << ": " << it->second << std::endl;
+return 0;
+/*********************************************************************/
